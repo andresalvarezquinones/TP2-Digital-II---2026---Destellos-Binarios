@@ -1,4 +1,4 @@
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  1
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00040     ; Contador inicia en 0
 000F   1283 1303      00041     BANKSEL CONTADOR
 0011   01A0           00042     CLRF    CONTADOR
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  2
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00093     ; Si solto antes de 1 segundo fue toque corto
 0033   2???           00094     CALL    DEMORA_50MS
 0034   1283 1303      00095     BANKSEL CONTADOR
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  3
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00146 
                       00147 ; =========================================
                       00148 ; RUNNING
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  4
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0089   00A5           00199     MOVWF   EFECTO
 008A   1283 1303      00200     BANKSEL DIRECCION
 008C   09A6           00201     COMF    DIRECCION, F
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  5
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00BD   0008           00252     RETURN
                       00253 
                       00254 ; =========================================
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  6
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00305 
                       00306 ; =========================================
                       00307 ; DEMORA 200 ms
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  7
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -396,7 +396,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00FB   0008           00343     RETURN
                       00344 
 20E1 3EFF             00345     END
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  8
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  8
 
 
 SYMBOL TABLE
@@ -455,7 +455,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE  9
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE  9
 
 
 SYMBOL TABLE
@@ -514,7 +514,7 @@ CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 10
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 10
 
 
 SYMBOL TABLE
@@ -573,7 +573,7 @@ EEDATA                            0000010C
 EEDATH                            0000010E
 EEIE                              00000004
 EEIF                              00000004
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 11
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 11
 
 
 SYMBOL TABLE
@@ -632,7 +632,7 @@ MSK5                              00000005
 MSK6                              00000006
 MSK7                              00000007
 NOT_A                             00000005
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 12
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 12
 
 
 SYMBOL TABLE
@@ -691,7 +691,7 @@ PS2                               00000002
 PSA                               00000003
 PSSAC0                            00000002
 PSSAC1                            00000003
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 13
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 13
 
 
 SYMBOL TABLE
@@ -750,7 +750,7 @@ RD6                               00000006
 RD7                               00000007
 RE0                               00000000
 RE1                               00000001
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 14
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 14
 
 
 SYMBOL TABLE
@@ -809,7 +809,7 @@ STRSYNC                           00000004
 SWDTEN                            00000000
 SYNC                              00000004
 T0CS                              00000005
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 15
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 15
 
 
 SYMBOL TABLE
@@ -868,7 +868,7 @@ TRISB4                            00000004
 TRISB5                            00000005
 TRISB6                            00000006
 TRISB7                            00000007
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 16
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 16
 
 
 SYMBOL TABLE
@@ -927,7 +927,7 @@ VREN                              00000007
 VROE                              00000006
 VRR                               00000005
 VRSS                              00000004
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 17
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 17
 
 
 SYMBOL TABLE
@@ -986,7 +986,7 @@ _FOSC_EC                          00003FFB
 _FOSC_EXTRC_CLKOUT                00003FFF
 _FOSC_EXTRC_NOCLKOUT              00003FFE
 _FOSC_HS                          00003FFA
-MPASM 5.87                           TP2.ASM   9-9-2026  1:55:43         PAGE 18
+MPASM 5.87                           TP2.ASM   9-9-2026  2:24:41         PAGE 18
 
 
 SYMBOL TABLE
