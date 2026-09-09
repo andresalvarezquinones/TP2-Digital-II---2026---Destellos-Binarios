@@ -1,0 +1,710 @@
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001  LIST P=16F887
+Error[108]  : Illegal character (3)
+                      00002 3 #INCLUDE <P16F887.INC>
+Error[108]  : Illegal character (4)
+                      00003 4 __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON &
+Error[108]  : Illegal character (&)
+                      00004 _CP_OFF & _CPD_OFF & _BOREN_OFF & _IESO_OFF & _FCMEN_OFF &
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00005 _LVP_OFF
+Error[108]  : Illegal character (5)
+0000                  00006 5 __CONFIG _CONFIG2, _BOR4V_BOR21V & _WRT_OFF
+Error[108]  : Illegal character (6)
+0000                  00007 6 CBLOCK 0x20
+Error[108]  : Illegal character (7)
+0000                  00008 7 CONTADOR
+Error[108]  : Illegal character (8)
+0000                  00009 8 TIEMPO
+Error[108]  : Illegal character (9)
+0000                  00010 9 D1
+Error[108]  : Illegal character (1)
+0000                  00011 10 D2
+Error[108]  : Illegal character (1)
+0000                  00012 11 D3
+Error[108]  : Illegal character (1)
+0000                  00013 12 EFECTO
+Error[108]  : Illegal character (1)
+0000                  00014 13 DIRECCION
+Error[108]  : Illegal character (1)
+0000                  00015 14 REP
+Error[108]  : Illegal character (1)
+0000                  00016 15 ENDC
+Error[108]  : Illegal character (1)
+0000                  00017 16 ORG 0x0000
+Error[108]  : Illegal character (1)
+0000                  00018 17 GOTO INICIO
+Error[108]  : Illegal character (1)
+0000                  00019 18 ORG 0x0005
+Error[108]  : Illegal character (1)
+0000                  00020 19 INICIO:
+Error[108]  : Illegal character (2)
+0000                  00021 20 ; Todo digital
+Error[108]  : Illegal character (2)
+0000                  00022 21 BANKSEL ANSEL
+Error[108]  : Illegal character (2)
+0000                  00023 22 CLRF ANSEL
+Error[108]  : Illegal character (2)
+0000                  00024 23 CLRF ANSELH
+Error[108]  : Illegal character (2)
+0000                  00025 24 ; PORTD salida para los LEDs
+Error[108]  : Illegal character (2)
+0000                  00026 25 BANKSEL TRISD
+Error[108]  : Illegal character (2)
+0000                  00027 26 CLRF TRISD
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[108]  : Illegal character (2)
+0000                  00028 27 ; RE0 unico boton
+Error[108]  : Illegal character (2)
+0000                  00029 28 BANKSEL TRISE
+Error[108]  : Illegal character (2)
+0000                  00030 29 BSF TRISE,0
+Error[108]  : Illegal character (3)
+0000                  00031 30 ; Contador inicia en 0
+Error[108]  : Illegal character (3)
+0000                  00032 31 BANKSEL CONTADOR
+Error[108]  : Illegal character (3)
+0000                  00033 32 CLRF CONTADOR
+Error[108]  : Illegal character (3)
+0000                  00034 33 ; LEDs apagados
+Error[108]  : Illegal character (3)
+0000                  00035 34 BANKSEL PORTD
+Error[108]  : Illegal character (3)
+0000                  00036 35 CLRF PORTD
+Error[108]  : Illegal character (3)
+0000                  00037 36 ; =========================================
+Error[108]  : Illegal character (3)
+0000                  00038 37 ; MODO CONTADOR
+Error[108]  : Illegal character (3)
+0000                  00039 38 ; =========================================
+Error[108]  : Illegal character (3)
+0000                  00040 39 CONTADOR_MODO:
+Error[108]  : Illegal character (4)
+0000                  00041 40 ; Mostrar contador
+Error[108]  : Illegal character (4)
+0000                  00042 41 BANKSEL CONTADOR
+Error[108]  : Illegal character (4)
+0000                  00043 42 MOVF CONTADOR,W
+Error[108]  : Illegal character (4)
+0000                  00044 43 BANKSEL PORTD
+Error[108]  : Illegal character (4)
+0000                  00045 44 MOVWF PORTD
+Error[108]  : Illegal character (4)
+0000                  00046 45 ; Esperar que se presione RE0
+Error[108]  : Illegal character (4)
+0000                  00047 46 ESPERAR_PRESION:
+Error[108]  : Illegal character (4)
+0000                  00048 47 BANKSEL PORTE
+Error[108]  : Illegal character (4)
+0000                  00049 48 BTFSC PORTE,0
+Error[108]  : Illegal character (4)
+0000                  00050 49 GOTO ESPERAR_PRESION
+Error[108]  : Illegal character (5)
+0000                  00051 50 ; Antirrebote
+Error[108]  : Illegal character (5)
+0000                  00052 51 CALL DEMORA_50MS
+Error[108]  : Illegal character (5)
+0000                  00053 52 BANKSEL PORTE
+Error[108]  : Illegal character (5)
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000                  00054 53 BTFSC PORTE,0
+Error[108]  : Illegal character (5)
+0000                  00055 54 GOTO ESPERAR_PRESION
+Error[108]  : Illegal character (5)
+0000                  00056 55 ; Empezar a medir cuanto dura la pulsacion
+Error[108]  : Illegal character (5)
+0000                  00057 56 BANKSEL TIEMPO
+Error[108]  : Illegal character (5)
+0000                  00058 57 CLRF TIEMPO
+Error[108]  : Illegal character (5)
+0000                  00059 58 ; =========================================
+Error[108]  : Illegal character (5)
+0000                  00060 59 ; MEDIR PULSACION
+Error[108]  : Illegal character (6)
+0000                  00061 60 ; =========================================
+Error[108]  : Illegal character (6)
+0000                  00062 61 MEDIR:
+Error[108]  : Illegal character (6)
+0000                  00063 62 CALL DEMORA_50MS
+Error[108]  : Illegal character (6)
+0000                  00064 63 BANKSEL TIEMPO
+Error[108]  : Illegal character (6)
+0000                  00065 64 INCF TIEMPO,F
+Error[108]  : Illegal character (6)
+0000                  00066 65 ; 20 x 50 ms = aproximadamente 1 segundo
+Error[108]  : Illegal character (6)
+0000                  00067 66 MOVLW D?20?
+Error[108]  : Illegal character (6)
+0000                  00068 67 SUBWF TIEMPO,W
+Error[108]  : Illegal character (6)
+0000                  00069 68 BTFSC STATUS,Z
+Error[108]  : Illegal character (6)
+0000                  00070 69 GOTO MODO_SECUENCIA
+Error[108]  : Illegal character (7)
+0000                  00071 70 ; Ver si sigue apretado
+Error[108]  : Illegal character (7)
+0000                  00072 71 BANKSEL PORTE
+Error[108]  : Illegal character (7)
+0000                  00073 72 BTFSS PORTE,0
+Error[108]  : Illegal character (7)
+0000                  00074 73 GOTO MEDIR
+Error[108]  : Illegal character (7)
+0000                  00075 74 ; Si solto antes de 1 segundo fue toque corto
+Error[108]  : Illegal character (7)
+0000                  00076 75 CALL DEMORA_50MS
+Error[108]  : Illegal character (7)
+0000                  00077 76 BANKSEL CONTADOR
+Error[108]  : Illegal character (7)
+0000                  00078 77 INCF CONTADOR,F
+Error[108]  : Illegal character (7)
+0000                  00079 78 ; Si pasa de 255 vuelve a 1
+Error[108]  : Illegal character (7)
+0000                  00080 79 GOTO CONTADOR_MODO
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[108]  : Illegal character (8)
+0000                  00081 80 ; =========================================
+Error[108]  : Illegal character (8)
+0000                  00082 81 ; MODO SECUENCIA
+Error[108]  : Illegal character (8)
+0000                  00083 82 ; =========================================
+Error[108]  : Illegal character (8)
+0000                  00084 83 MODO_SECUENCIA:
+Error[108]  : Illegal character (8)
+0000                  00085 84 ; Esperar que suelte RE0
+Error[108]  : Illegal character (8)
+0000                  00086 85 ESPERAR_SUELTA:
+Error[108]  : Illegal character (8)
+0000                  00087 86 BANKSEL PORTE
+Error[108]  : Illegal character (8)
+0000                  00088 87 BTFSS PORTE,0
+Error[108]  : Illegal character (8)
+0000                  00089 88 GOTO ESPERAR_SUELTA
+Error[108]  : Illegal character (8)
+0000                  00090 89 CALL DEMORA_50MS
+Error[108]  : Illegal character (9)
+0000                  00091 90 ; Hacer RUNNING 3 veces
+Error[108]  : Illegal character (9)
+0000                  00092 91 BANKSEL REP
+Error[108]  : Illegal character (9)
+0000                  00093 92 MOVLW D?3?
+Error[108]  : Illegal character (9)
+0000                  00094 93 MOVWF REP
+Error[108]  : Illegal character (9)
+0000                  00095 94 RUN3:
+Error[108]  : Illegal character (9)
+0000                  00096 95 CALL RUNNING
+Error[108]  : Illegal character (9)
+0000                  00097 96 BTFSC STATUS,C
+Error[108]  : Illegal character (9)
+0000                  00098 97 GOTO SALIR_SECUENCIA
+Error[108]  : Illegal character (9)
+0000                  00099 98 BANKSEL REP
+Error[108]  : Illegal character (9)
+0000                  00100 99 DECFSZ REP,F
+Error[108]  : Illegal character (1)
+0000                  00101 100 GOTO RUN3
+Error[108]  : Illegal character (1)
+0000                  00102 101 ; Hacer BRUNNING 3 veces
+Error[108]  : Illegal character (1)
+0000                  00103 102 MOVLW D?3?
+Error[108]  : Illegal character (1)
+0000                  00104 103 MOVWF REP
+Error[108]  : Illegal character (1)
+0000                  00105 104 BRUN3:
+Error[108]  : Illegal character (1)
+0000                  00106 105 CALL BRUNNING
+Error[108]  : Illegal character (1)
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000                  00107 106 BTFSC STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00108 107 GOTO SALIR_SECUENCIA
+Error[108]  : Illegal character (1)
+0000                  00109 108 BANKSEL REP
+Error[108]  : Illegal character (1)
+0000                  00110 109 DECFSZ REP,F
+Error[108]  : Illegal character (1)
+0000                  00111 110 GOTO BRUN3
+Error[108]  : Illegal character (1)
+0000                  00112 111 ; Hacer CRAWLING 3 veces
+Error[108]  : Illegal character (1)
+0000                  00113 112 MOVLW D?3?
+Error[108]  : Illegal character (1)
+0000                  00114 113 MOVWF REP
+Error[108]  : Illegal character (1)
+0000                  00115 114 CRAW3:
+Error[108]  : Illegal character (1)
+0000                  00116 115 CALL CRAWLING
+Error[108]  : Illegal character (1)
+0000                  00117 116 BTFSC STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00118 117 GOTO SALIR_SECUENCIA
+Error[108]  : Illegal character (1)
+0000                  00119 118 BANKSEL REP
+Error[108]  : Illegal character (1)
+0000                  00120 119 DECFSZ REP,F
+Error[108]  : Illegal character (1)
+0000                  00121 120 GOTO CRAW3
+Error[108]  : Illegal character (1)
+0000                  00122 121 ; Repetir secuencias continuamente
+Error[108]  : Illegal character (1)
+0000                  00123 122 GOTO MODO_SECUENCIA
+Error[108]  : Illegal character (1)
+0000                  00124 123 ; =========================================
+Error[108]  : Illegal character (1)
+0000                  00125 124 ; RUNNING
+Error[108]  : Illegal character (1)
+0000                  00126 125 ; Un LED recorre de un lado al otro
+Error[108]  : Illegal character (1)
+0000                  00127 126 ; =========================================
+Error[108]  : Illegal character (1)
+0000                  00128 127 RUNNING:
+Error[108]  : Illegal character (1)
+0000                  00129 128 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00130 129 BANKSEL EFECTO
+Error[108]  : Illegal character (1)
+0000                  00131 130 MOVLW B?00000001?
+Error[108]  : Illegal character (1)
+0000                  00132 131 MOVWF EFECTO
+Error[108]  : Illegal character (1)
+0000                  00133 132 RUN_LOOP:
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[108]  : Illegal character (1)
+0000                  00134 133 MOVF EFECTO,W
+Error[108]  : Illegal character (1)
+0000                  00135 134 BANKSEL PORTD
+Error[108]  : Illegal character (1)
+0000                  00136 135 MOVWF PORTD
+Error[108]  : Illegal character (1)
+0000                  00137 136 CALL DEMORA_200MS
+Error[108]  : Illegal character (1)
+0000                  00138 137 CALL REVISAR_BOTON
+Error[108]  : Illegal character (1)
+0000                  00139 138 BTFSC STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00140 139 RETURN
+Error[108]  : Illegal character (1)
+0000                  00141 140 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00142 141 BANKSEL EFECTO
+Error[108]  : Illegal character (1)
+0000                  00143 142 RLF EFECTO,F
+Error[108]  : Illegal character (1)
+0000                  00144 143 BTFSS STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00145 144 GOTO RUN_LOOP
+Error[108]  : Illegal character (1)
+0000                  00146 145 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00147 146 RETURN
+Error[108]  : Illegal character (1)
+0000                  00148 147 ; =========================================
+Error[108]  : Illegal character (1)
+0000                  00149 148 ; BRUNNING
+Error[108]  : Illegal character (1)
+0000                  00150 149 ; LED va y vuelve
+Error[108]  : Illegal character (1)
+0000                  00151 150 ; =========================================
+Error[108]  : Illegal character (1)
+0000                  00152 151 BRUNNING:
+Error[108]  : Illegal character (1)
+0000                  00153 152 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00154 153 BANKSEL EFECTO
+Error[108]  : Illegal character (1)
+0000                  00155 154 MOVLW B?00000001?
+Error[108]  : Illegal character (1)
+0000                  00156 155 MOVWF EFECTO
+Error[108]  : Illegal character (1)
+0000                  00157 156 CLRF DIRECCION
+Error[108]  : Illegal character (1)
+0000                  00158 157 BRUN_LOOP:
+Error[108]  : Illegal character (1)
+0000                  00159 158 MOVF EFECTO,W
+Error[108]  : Illegal character (1)
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000                  00160 159 BANKSEL PORTD
+Error[108]  : Illegal character (1)
+0000                  00161 160 MOVWF PORTD
+Error[108]  : Illegal character (1)
+0000                  00162 161 CALL DEMORA_200MS
+Error[108]  : Illegal character (1)
+0000                  00163 162 CALL REVISAR_BOTON
+Error[108]  : Illegal character (1)
+0000                  00164 163 BTFSC STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00165 164 RETURN
+Error[108]  : Illegal character (1)
+0000                  00166 165 BANKSEL DIRECCION
+Error[108]  : Illegal character (1)
+0000                  00167 166 BTFSC DIRECCION,0
+Error[108]  : Illegal character (1)
+0000                  00168 167 GOTO DERECHA
+Error[108]  : Illegal character (1)
+0000                  00169 168 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00170 169 BANKSEL EFECTO
+Error[108]  : Illegal character (1)
+0000                  00171 170 RLF EFECTO,F
+Error[108]  : Illegal character (1)
+0000                  00172 171 BTFSS STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00173 172 GOTO BRUN_LOOP
+Error[108]  : Illegal character (1)
+0000                  00174 173 MOVLW B?01000000?
+Error[108]  : Illegal character (1)
+0000                  00175 174 MOVWF EFECTO
+Error[108]  : Illegal character (1)
+0000                  00176 175 BANKSEL DIRECCION
+Error[108]  : Illegal character (1)
+0000                  00177 176 COMF DIRECCION,F
+Error[108]  : Illegal character (1)
+0000                  00178 177 GOTO BRUN_LOOP
+Error[108]  : Illegal character (1)
+0000                  00179 178 DERECHA:
+Error[108]  : Illegal character (1)
+0000                  00180 179 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00181 180 BANKSEL EFECTO
+Error[108]  : Illegal character (1)
+0000                  00182 181 RRF EFECTO,F
+Error[108]  : Illegal character (1)
+0000                  00183 182 BTFSS STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00184 183 GOTO BRUN_LOOP
+Error[108]  : Illegal character (1)
+0000                  00185 184 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00186 185 RETURN
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[108]  : Illegal character (1)
+0000                  00187 186 ; =========================================
+Error[108]  : Illegal character (1)
+0000                  00188 187 ; CRAWLING
+Error[108]  : Illegal character (1)
+0000                  00189 188 ; Enciende y apaga progresivamente
+Error[108]  : Illegal character (1)
+0000                  00190 189 ; =========================================
+Error[108]  : Illegal character (1)
+0000                  00191 190 CRAWLING:
+Error[108]  : Illegal character (1)
+0000                  00192 191 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00193 192 BANKSEL EFECTO
+Error[108]  : Illegal character (1)
+0000                  00194 193 CLRF EFECTO
+Error[108]  : Illegal character (1)
+0000                  00195 194 ENCENDER:
+Error[108]  : Illegal character (1)
+0000                  00196 195 BCF STATUS,C
+Error[108]  : Illegal character (1)
+0000                  00197 196 RLF EFECTO,F
+Error[108]  : Illegal character (1)
+0000                  00198 197 BSF EFECTO,0
+Error[108]  : Illegal character (1)
+0000                  00199 198 MOVF EFECTO,W
+Error[108]  : Illegal character (1)
+0000                  00200 199 BANKSEL PORTD
+Error[108]  : Illegal character (2)
+0000                  00201 200 MOVWF PORTD
+Error[108]  : Illegal character (2)
+0000                  00202 201 CALL DEMORA_100MS
+Error[108]  : Illegal character (2)
+0000                  00203 202 CALL REVISAR_BOTON
+Error[108]  : Illegal character (2)
+0000                  00204 203 BTFSC STATUS,C
+Error[108]  : Illegal character (2)
+0000                  00205 204 RETURN
+Error[108]  : Illegal character (2)
+0000                  00206 205 BANKSEL EFECTO
+Error[108]  : Illegal character (2)
+0000                  00207 206 MOVF EFECTO,W
+Error[108]  : Illegal character (2)
+0000                  00208 207 XORLW 0xFF
+Error[108]  : Illegal character (2)
+0000                  00209 208 BTFSS STATUS,Z
+Error[108]  : Illegal character (2)
+0000                  00210 209 GOTO ENCENDER
+Error[108]  : Illegal character (2)
+0000                  00211 210 APAGAR:
+Error[108]  : Illegal character (2)
+0000                  00212 211 BCF STATUS,C
+Error[108]  : Illegal character (2)
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000                  00213 212 BANKSEL EFECTO
+Error[108]  : Illegal character (2)
+0000                  00214 213 RRF EFECTO,F
+Error[108]  : Illegal character (2)
+0000                  00215 214 MOVF EFECTO,W
+Error[108]  : Illegal character (2)
+0000                  00216 215 BANKSEL PORTD
+Error[108]  : Illegal character (2)
+0000                  00217 216 MOVWF PORTD
+Error[108]  : Illegal character (2)
+0000                  00218 217 CALL DEMORA_100MS
+Error[108]  : Illegal character (2)
+0000                  00219 218 CALL REVISAR_BOTON
+Error[108]  : Illegal character (2)
+0000                  00220 219 BTFSC STATUS,C
+Error[108]  : Illegal character (2)
+0000                  00221 220 RETURN
+Error[108]  : Illegal character (2)
+0000                  00222 221 BANKSEL EFECTO
+Error[108]  : Illegal character (2)
+0000                  00223 222 MOVF EFECTO,W
+Error[108]  : Illegal character (2)
+0000                  00224 223 BTFSS STATUS,Z
+Error[108]  : Illegal character (2)
+0000                  00225 224 GOTO APAGAR
+Error[108]  : Illegal character (2)
+0000                  00226 225 BCF STATUS,C
+Error[108]  : Illegal character (2)
+0000                  00227 226 RETURN
+Error[108]  : Illegal character (2)
+0000                  00228 227 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00229 228 ; REVISAR BOTON DURANTE SECUENCIA
+Error[108]  : Illegal character (2)
+0000                  00230 229 ; C=1 si se presiono RE0
+Error[108]  : Illegal character (2)
+0000                  00231 230 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00232 231 REVISAR_BOTON:
+Error[108]  : Illegal character (2)
+0000                  00233 232 BANKSEL PORTE
+Error[108]  : Illegal character (2)
+0000                  00234 233 BTFSC PORTE,0
+Error[108]  : Illegal character (2)
+0000                  00235 234 GOTO NO_PRESION
+Error[108]  : Illegal character (2)
+0000                  00236 235 CALL DEMORA_50MS
+Error[108]  : Illegal character (2)
+0000                  00237 236 BANKSEL PORTE
+Error[108]  : Illegal character (2)
+0000                  00238 237 BTFSC PORTE,0
+Error[108]  : Illegal character (2)
+0000                  00239 238 GOTO NO_PRESION
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[108]  : Illegal character (2)
+0000                  00240 239 BSF STATUS,C
+Error[108]  : Illegal character (2)
+0000                  00241 240 RETURN
+Error[108]  : Illegal character (2)
+0000                  00242 241 NO_PRESION:
+Error[108]  : Illegal character (2)
+0000                  00243 242 BCF STATUS,C
+Error[108]  : Illegal character (2)
+0000                  00244 243 RETURN
+Error[108]  : Illegal character (2)
+0000                  00245 244 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00246 245 ; SALIR DE SECUENCIA
+Error[108]  : Illegal character (2)
+0000                  00247 246 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00248 247 SALIR_SECUENCIA:
+Error[108]  : Illegal character (2)
+0000                  00249 248 ; Esperar que suelte RE0
+Error[108]  : Illegal character (2)
+0000                  00250 249 BANKSEL PORTE
+Error[108]  : Illegal character (2)
+0000                  00251 250 BTFSS PORTE,0
+Error[108]  : Illegal character (2)
+0000                  00252 251 GOTO SALIR_SECUENCIA
+Error[108]  : Illegal character (2)
+0000                  00253 252 CALL DEMORA_50MS
+Error[108]  : Illegal character (2)
+0000                  00254 253 ; Volver a mostrar contador
+Error[108]  : Illegal character (2)
+0000                  00255 254 BANKSEL CONTADOR
+Error[108]  : Illegal character (2)
+0000                  00256 255 MOVF CONTADOR,W
+Error[108]  : Illegal character (2)
+0000                  00257 256 BANKSEL PORTD
+Error[108]  : Illegal character (2)
+0000                  00258 257 MOVWF PORTD
+Error[108]  : Illegal character (2)
+0000                  00259 258 GOTO CONTADOR_MODO
+Error[108]  : Illegal character (2)
+0000                  00260 259 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00261 260 ; DEMORA 50 ms
+Error[108]  : Illegal character (2)
+0000                  00262 261 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00263 262 DEMORA_50MS:
+Error[108]  : Illegal character (2)
+0000                  00264 263 BANKSEL D1
+Error[108]  : Illegal character (2)
+0000                  00265 264 MOVLW D?100?
+Error[108]  : Illegal character (2)
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000                  00266 265 MOVWF D1
+Error[108]  : Illegal character (2)
+0000                  00267 266 D50_1:
+Error[108]  : Illegal character (2)
+0000                  00268 267 MOVLW D?166?
+Error[108]  : Illegal character (2)
+0000                  00269 268 MOVWF D2
+Error[108]  : Illegal character (2)
+0000                  00270 269 D50_2:
+Error[108]  : Illegal character (2)
+0000                  00271 270 DECFSZ D2,F
+Error[108]  : Illegal character (2)
+0000                  00272 271 GOTO D50_2
+Error[108]  : Illegal character (2)
+0000                  00273 272 DECFSZ D1,F
+Error[108]  : Illegal character (2)
+0000                  00274 273 GOTO D50_1
+Error[108]  : Illegal character (2)
+0000                  00275 274 RETURN
+Error[108]  : Illegal character (2)
+0000                  00276 275 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00277 276 ; DEMORA 200 ms
+Error[108]  : Illegal character (2)
+0000                  00278 277 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00279 278 DEMORA_200MS:
+Error[108]  : Illegal character (2)
+0000                  00280 279 BANKSEL D1
+Error[108]  : Illegal character (2)
+0000                  00281 280 MOVLW D?255?
+Error[108]  : Illegal character (2)
+0000                  00282 281 MOVWF D1
+Error[108]  : Illegal character (2)
+0000                  00283 282 D200_1:
+Error[108]  : Illegal character (2)
+0000                  00284 283 MOVLW D?255?
+Error[108]  : Illegal character (2)
+0000                  00285 284 MOVWF D2
+Error[108]  : Illegal character (2)
+0000                  00286 285 D200_2:
+Error[108]  : Illegal character (2)
+0000                  00287 286 DECFSZ D2,F
+Error[108]  : Illegal character (2)
+0000                  00288 287 GOTO D200_2
+Error[108]  : Illegal character (2)
+0000                  00289 288 DECFSZ D1,F
+Error[108]  : Illegal character (2)
+0000                  00290 289 GOTO D200_1
+Error[108]  : Illegal character (2)
+0000                  00291 290 RETURN
+Error[108]  : Illegal character (2)
+0000                  00292 291 ; ============= ============================
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[108]  : Illegal character (2)
+0000                  00293 292 ; DEMORA 100 ms
+Error[108]  : Illegal character (2)
+0000                  00294 293 ; =========================================
+Error[108]  : Illegal character (2)
+0000                  00295 294 DEMORA_100MS:
+Error[108]  : Illegal character (2)
+0000                  00296 295 BANKSEL D1
+Error[108]  : Illegal character (2)
+0000                  00297 296 MOVLW D?250?
+Error[108]  : Illegal character (2)
+0000                  00298 297 MOVWF D1
+Error[108]  : Illegal character (2)
+0000                  00299 298 D100_1:
+Error[108]  : Illegal character (2)
+0000                  00300 299 MOVLW D?16?
+Error[108]  : Illegal character (3)
+0000                  00301 300 MOVWF D2
+Error[108]  : Illegal character (3)
+0000                  00302 301 D100_2:
+Error[108]  : Illegal character (3)
+0000                  00303 302 MOVLW D?7?
+Error[108]  : Illegal character (3)
+0000                  00304 303 MOVWF D3
+Error[108]  : Illegal character (3)
+0000                  00305 304 D100_3:
+Error[108]  : Illegal character (3)
+0000                  00306 305 DECFSZ D3,F
+Error[108]  : Illegal character (3)
+0000                  00307 306 GOTO D100_3
+Error[108]  : Illegal character (3)
+0000                  00308 307 DECFSZ D2,F
+Error[108]  : Illegal character (3)
+0000                  00309 308 GOTO D100_2
+Error[108]  : Illegal character (3)
+0000                  00310 309 DECFSZ D1,F
+Error[108]  : Illegal character (3)
+0000                  00311 310 GOTO D100_1
+Error[108]  : Illegal character (3)
+0000                  00312 311 RETURN
+                      00313     END
+MPASM 5.87                NEWASMTEMPLATE.ASM   9-9-2026  1:03:12         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_LVP_OFF                          00000000
+__16F887                          00000001
+
+Errors   :   311
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
