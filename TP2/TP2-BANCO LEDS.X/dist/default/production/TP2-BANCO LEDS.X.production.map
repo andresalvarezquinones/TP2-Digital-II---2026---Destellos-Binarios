@@ -1,0 +1,95 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Wed Sep 09 01:55:44 2026
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000005    program   0x0001ee
+.config_2007_BUILD/DEFAULT/PRODUCTION/TP2.O       code   0x002007    program   0x000002
+.config_2008_BUILD/DEFAULT/PRODUCTION/TP2.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000005    0x0000fb      
+                            0x002007    0x002008      
+            252 out of 8455 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   APAGAR   0x0000ab    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    BRUN3   0x00004a    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 BRUNNING   0x000070    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                BRUN_LOOP   0x000076    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+            CONTADOR_MODO   0x000015    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    CRAW3   0x000053    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 CRAWLING   0x000096    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D100_1   0x0000f1    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D100_2   0x0000f3    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D100_3   0x0000f5    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D200_1   0x0000e6    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D200_2   0x0000e8    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    D50_1   0x0000db    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    D50_2   0x0000dd    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+             DEMORA_100MS   0x0000ed    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+             DEMORA_200MS   0x0000e2    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+              DEMORA_50MS   0x0000d7    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                  DERECHA   0x00008e    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 ENCENDER   0x00009a    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+          ESPERAR_PRESION   0x00001b    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+           ESPERAR_SUELTA   0x000038    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   INICIO   0x000005    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    MEDIR   0x000027    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+           MODO_SECUENCIA   0x000038    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+               NO_PRESION   0x0000c9    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+            REVISAR_BOTON   0x0000be    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                     RUN3   0x000041    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                  RUNNING   0x00005b    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 RUN_LOOP   0x000060    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+          SALIR_SECUENCIA   0x0000cb    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000005    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+            CONTADOR_MODO   0x000015    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+          ESPERAR_PRESION   0x00001b    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    MEDIR   0x000027    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+           ESPERAR_SUELTA   0x000038    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+           MODO_SECUENCIA   0x000038    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                     RUN3   0x000041    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    BRUN3   0x00004a    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    CRAW3   0x000053    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                  RUNNING   0x00005b    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 RUN_LOOP   0x000060    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 BRUNNING   0x000070    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                BRUN_LOOP   0x000076    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                  DERECHA   0x00008e    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 CRAWLING   0x000096    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                 ENCENDER   0x00009a    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   APAGAR   0x0000ab    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+            REVISAR_BOTON   0x0000be    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+               NO_PRESION   0x0000c9    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+          SALIR_SECUENCIA   0x0000cb    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+              DEMORA_50MS   0x0000d7    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    D50_1   0x0000db    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                    D50_2   0x0000dd    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+             DEMORA_200MS   0x0000e2    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D200_1   0x0000e6    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D200_2   0x0000e8    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+             DEMORA_100MS   0x0000ed    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D100_1   0x0000f1    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D100_2   0x0000f3    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+                   D100_3   0x0000f5    program     static C:\Users\Usuario\Desktop\DestellosBinarios\TP2-Digital-II---2026---Destellos-Binarios\TP2\TP2-BANCO LEDS.X\tp2.asm
+
+
