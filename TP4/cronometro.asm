@@ -1,0 +1,444 @@
+LIST P=16F887
+        #INCLUDE <P16F887.INC>
+
+        __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF & _BOREN_OFF & _IESO_OFF & _FCMEN_OFF & _LVP_OFF
+        __CONFIG _CONFIG2, _BOR4V_BOR21V & _WRT_OFF
+
+; VARIABLES
+        CBLOCK 0x20
+        CENT
+        SEG
+        U_CENT
+        D_CENT
+        U_SEG
+        D_SEG
+        DISPLAY
+        TICK
+        AUX
+        ESTADO
+        BOTON_ANT
+        CONT_LARGA
+        CONT_LARGA_H
+        FUE_LARGA
+        REBOTE
+        AJUSTE_TICK
+        LIMITE_TICK
+        ENDC
+
+; VARIABLES DE CONTEXTO
+        CBLOCK 0x70
+        W_TEMP
+        STATUS_TEMP
+        PCLATH_TEMP
+        ENDC
+
+; RESET
+        ORG 0x0000
+        GOTO INICIO
+
+; INTERRUPCION
+        ORG 0x0004
+
+ISR:
+        MOVWF W_TEMP
+        SWAPF STATUS,W
+        MOVWF STATUS_TEMP
+        BCF STATUS,RP0
+        BCF STATUS,RP1
+        MOVF PCLATH,W
+        MOVWF PCLATH_TEMP
+        CLRF PCLATH
+
+; TIMER0
+        BTFSS INTCON,T0IF
+        GOTO FIN_ISR
+        BCF INTCON,T0IF
+
+; RECARGAR TIMER0
+        MOVLW D'131'
+        MOVWF TMR0
+
+; ANTIRREBOTE
+        BANKSEL REBOTE
+        MOVF REBOTE,F
+        BTFSC STATUS,Z
+        GOTO REVISAR_BOTON
+        DECF REBOTE,F
+
+; RE0 ACTIVO EN 0
+REVISAR_BOTON:
+        BANKSEL PORTE
+        BTFSC PORTE,0
+        GOTO BOTON_LIBRE
+
+        BANKSEL BOTON_ANT
+        MOVF BOTON_ANT,F
+        BTFSS STATUS,Z
+        GOTO BOTON_MANTENIDO
+
+; PRIMERA DETECCION
+        MOVF REBOTE,F
+        BTFSS STATUS,Z
+        GOTO DESPUES_BOTON
+        MOVLW D'1'
+        MOVWF BOTON_ANT
+        CLRF CONT_LARGA
+        CLRF CONT_LARGA_H
+        CLRF FUE_LARGA
+        GOTO DESPUES_BOTON
+
+BOTON_MANTENIDO:
+        BANKSEL FUE_LARGA
+        MOVF FUE_LARGA,F
+        BTFSS STATUS,Z
+        GOTO DESPUES_BOTON
+
+        INCF CONT_LARGA,F
+        BTFSS STATUS,Z
+        GOTO DESPUES_BOTON
+
+        INCF CONT_LARGA_H,F
+        MOVLW D'16'
+        SUBWF CONT_LARGA_H,W
+        BTFSS STATUS,Z
+        GOTO DESPUES_BOTON
+
+; PULSACION LARGA
+        MOVLW D'1'
+        MOVWF FUE_LARGA
+        CLRF ESTADO
+
+; RESET 00:00
+        CLRF CENT
+        CLRF SEG
+        CLRF TICK
+        CLRF AJUSTE_TICK
+        MOVLW D'20'
+        MOVWF LIMITE_TICK
+        CALL CONVERTIR
+        GOTO DESPUES_BOTON
+
+BOTON_LIBRE:
+        BANKSEL BOTON_ANT
+        MOVF BOTON_ANT,F
+        BTFSC STATUS,Z
+        GOTO DESPUES_BOTON
+
+        CLRF BOTON_ANT
+
+; ACTIVAR ANTIRREBOTE
+        MOVLW D'80'
+        MOVWF REBOTE
+
+; VERIFICAR SI FUE PULSACION LARGA
+        MOVF FUE_LARGA,F
+        BTFSS STATUS,Z
+        GOTO LIMPIAR_BOTON
+
+; PULSACION CORTA: PAUSA / REANUDA
+        BANKSEL ESTADO
+        MOVLW D'1'
+        XORWF ESTADO,F
+
+LIMPIAR_BOTON:
+        BANKSEL CONT_LARGA
+        CLRF CONT_LARGA
+        CLRF CONT_LARGA_H
+        CLRF FUE_LARGA
+        GOTO DESPUES_BOTON
+
+DESPUES_BOTON:
+        BANKSEL ESTADO
+        MOVF ESTADO,F
+        BTFSC STATUS,Z
+        GOTO FIN_ISR
+
+; AJUSTE DE TIEMPO PROMEDIO 19,3
+        BANKSEL TICK
+        INCF TICK,F
+        MOVF LIMITE_TICK,W
+        SUBWF TICK,W
+        BTFSS STATUS,Z
+        GOTO FIN_ISR
+
+        CLRF TICK
+        INCF AJUSTE_TICK,F
+
+; 1, 2 Y 3 -> PROXIMA CENTESIMA USA 20
+        MOVLW D'4'
+        SUBWF AJUSTE_TICK,W
+        BTFSC STATUS,C
+        GOTO PONER_19
+
+        MOVLW D'20'
+        MOVWF LIMITE_TICK
+        GOTO REVISAR_AJUSTE
+
+; 4 A 9 -> PROXIMA CENTESIMA USA 19
+PONER_19:
+        MOVLW D'19'
+        MOVWF LIMITE_TICK
+
+REVISAR_AJUSTE:
+        MOVLW D'10'
+        SUBWF AJUSTE_TICK,W
+        BTFSS STATUS,Z
+        GOTO SUMAR_CENTESIMA
+
+; REINICIAR PATRON
+        CLRF AJUSTE_TICK
+        MOVLW D'20'
+        MOVWF LIMITE_TICK
+
+SUMAR_CENTESIMA:
+        INCF CENT,F
+
+; CENT = 100
+        MOVLW D'100'
+        SUBWF CENT,W
+        BTFSS STATUS,Z
+        GOTO ACTUALIZAR
+
+        CLRF CENT
+        INCF SEG,F
+
+; SEG = 60
+        MOVLW D'60'
+        SUBWF SEG,W
+        BTFSS STATUS,Z
+        GOTO ACTUALIZAR
+
+; 59:99 -> 00:00
+        CLRF SEG
+
+ACTUALIZAR:
+        CALL CONVERTIR
+        GOTO FIN_ISR
+
+FIN_ISR:
+        BCF STATUS,RP0
+        BCF STATUS,RP1
+        CLRF PCLATH
+
+; REFRESCAR UN DISPLAY AL FINAL DE CADA INTERRUPCION
+        CALL MULTIPLEXAR
+
+        BCF STATUS,RP0
+        BCF STATUS,RP1
+        MOVF PCLATH_TEMP,W
+        MOVWF PCLATH
+        SWAPF STATUS_TEMP,W
+        MOVWF STATUS
+        SWAPF W_TEMP,F
+        SWAPF W_TEMP,W
+        RETFIE
+
+INICIO:
+; TODO DIGITAL
+        BANKSEL ANSEL
+        CLRF ANSEL
+        CLRF ANSELH
+
+; PORTB = SEGMENTOS
+        BANKSEL TRISB
+        CLRF TRISB
+
+; RC0-RC3 = SELECTORES
+        BANKSEL TRISC
+        BCF TRISC,0
+        BCF TRISC,1
+        BCF TRISC,2
+        BCF TRISC,3
+
+; RE0 = BOTON
+        BANKSEL TRISE
+        BSF TRISE,0
+
+        BANKSEL PORTC
+        CLRF PORTC
+
+        BANKSEL PORTB
+        CLRF PORTB
+
+; INICIALIZAR VARIABLES
+        BANKSEL CENT
+        CLRF CENT
+        CLRF SEG
+        CLRF U_CENT
+        CLRF D_CENT
+        CLRF U_SEG
+        CLRF D_SEG
+        CLRF DISPLAY
+        CLRF TICK
+        CLRF AUX
+        CLRF ESTADO
+        CLRF BOTON_ANT
+        CLRF CONT_LARGA
+        CLRF CONT_LARGA_H
+        CLRF FUE_LARGA
+        CLRF REBOTE
+        CLRF AJUSTE_TICK
+
+; EMPEZAR CON 20 TICKS
+        MOVLW D'20'
+        MOVWF LIMITE_TICK
+
+; PREPARAR 00:00
+        CALL CONVERTIR
+
+; CONFIGURAR TIMER0
+        BANKSEL OPTION_REG
+        BCF OPTION_REG,T0CS
+        BCF OPTION_REG,PSA
+        BCF OPTION_REG,PS2
+        BCF OPTION_REG,PS1
+        BSF OPTION_REG,PS0
+
+        BANKSEL TMR0
+        MOVLW D'131'
+        MOVWF TMR0
+
+; HABILITAR INTERRUPCIONES
+        BANKSEL INTCON
+        BCF INTCON,T0IF
+        BSF INTCON,T0IE
+        BSF INTCON,GIE
+
+PRINCIPAL:
+        GOTO PRINCIPAL
+
+CONVERTIR:
+        BANKSEL CENT
+
+; CENTESIMAS
+        MOVF CENT,W
+        MOVWF AUX
+        CLRF D_CENT
+
+CONV_CENT:
+        MOVLW D'10'
+        SUBWF AUX,W
+        BTFSS STATUS,C
+        GOTO FIN_CENT
+        MOVLW D'10'
+        SUBWF AUX,F
+        INCF D_CENT,F
+        GOTO CONV_CENT
+
+FIN_CENT:
+        MOVF AUX,W
+        MOVWF U_CENT
+
+; SEGUNDOS
+        MOVF SEG,W
+        MOVWF AUX
+        CLRF D_SEG
+
+CONV_SEG:
+        MOVLW D'10'
+        SUBWF AUX,W
+        BTFSS STATUS,C
+        GOTO FIN_SEG
+        MOVLW D'10'
+        SUBWF AUX,F
+        INCF D_SEG,F
+        GOTO CONV_SEG
+
+FIN_SEG:
+        MOVF AUX,W
+        MOVWF U_SEG
+        RETURN
+
+MULTIPLEXAR:
+        BANKSEL PORTC
+        CLRF PORTC
+        BANKSEL DISPLAY
+        MOVF DISPLAY,W
+        BTFSC STATUS,Z
+        GOTO DISP0
+
+        MOVF DISPLAY,W
+        XORLW D'1'
+        BTFSC STATUS,Z
+        GOTO DISP1
+
+        MOVF DISPLAY,W
+        XORLW D'2'
+        BTFSC STATUS,Z
+        GOTO DISP2
+
+        GOTO DISP3
+
+DISP0:
+        BANKSEL D_SEG
+        MOVLW HIGH TABLA
+        MOVWF PCLATH
+        MOVF D_SEG,W
+        CALL TABLA
+        BANKSEL PORTB
+        MOVWF PORTB
+        BANKSEL PORTC
+        BSF PORTC,0
+        GOTO SIG_DISPLAY
+
+DISP1:
+        BANKSEL U_SEG
+        MOVLW HIGH TABLA
+        MOVWF PCLATH
+        MOVF U_SEG,W
+        CALL TABLA
+        BANKSEL PORTB
+        MOVWF PORTB
+        BANKSEL PORTC
+        BSF PORTC,1
+        GOTO SIG_DISPLAY
+
+DISP2:
+        BANKSEL D_CENT
+        MOVLW HIGH TABLA
+        MOVWF PCLATH
+        MOVF D_CENT,W
+        CALL TABLA
+        BANKSEL PORTB
+        MOVWF PORTB
+        BANKSEL PORTC
+        BSF PORTC,2
+        GOTO SIG_DISPLAY
+
+DISP3:
+        BANKSEL U_CENT
+        MOVLW HIGH TABLA
+        MOVWF PCLATH
+        MOVF U_CENT,W
+        CALL TABLA
+        BANKSEL PORTB
+        MOVWF PORTB
+        BANKSEL PORTC
+        BSF PORTC,3
+
+SIG_DISPLAY:
+        BANKSEL DISPLAY
+        INCF DISPLAY,F
+        MOVLW D'4'
+        SUBWF DISPLAY,W
+        BTFSC STATUS,Z
+        CLRF DISPLAY
+        RETURN
+
+; TABLA 7 SEGMENTOS FIJA EN 0x0700
+        ORG 0x0700
+
+TABLA:
+        ADDWF PCL,F
+        RETLW B'01111110'       ; 0
+        RETLW B'00010010'       ; 1
+        RETLW B'10111100'       ; 2
+        RETLW B'10110110'       ; 3
+        RETLW B'11010010'       ; 4
+        RETLW B'11100110'       ; 5
+        RETLW B'11101110'       ; 6
+        RETLW B'00110010'       ; 7
+        RETLW B'11111110'       ; 8
+        RETLW B'11110110'       ; 9
+
+        END
